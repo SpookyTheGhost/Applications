@@ -1,0 +1,5 @@
+PHP
+array_search($key, array_reverse($array, true));
+
+PYTHON
+("".join(str(e) for e in LIST)).rfind(KEY)
