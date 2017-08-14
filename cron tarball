@@ -1,0 +1,17 @@
+linux doesn't care about file extensions as it means nothing
+
+sudo tar -cvpzf filename.tar.gz --exclude = /mnt /
+c: create or overwrite backup file
+v: logs
+p: preserves permissions
+z: compress (tarball)
+f: filename
+
+/ is root directory
+x: extract
+xvpz
+
+
+sudo crontab -e
+m h dom m dow comm
+[0-59] [0-23] [1-31] [1-12] [0-6]
