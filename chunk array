@@ -1,0 +1,15 @@
+PHP
+for ($i = start; $i < end; $i++) {
+    array_push($array, $item[$i]);
+}
+
+JS
+for (var i = start; i < end; i++) {
+    array.push(item[i]);
+}
+
+PYTHON
+i = start;
+while i < end:
+    list.append(item[i]);
+    i++
