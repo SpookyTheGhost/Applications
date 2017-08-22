@@ -1,0 +1,14 @@
+Article::doEdit() and WikiPage::doEdit() (deprecated in 1.21) were removed.
+WikiPage::exists()
+WikiPage::doDeleteArticleReal	(	 	$reason,
+ 	$suppress = true,
+User 	$user = null,
+ 	$logsubtype = 'delete' 
+)
+
+static WikiPage::factory	(	Title 	$title	)
+WikiPage::doEditContent	(	Content 	$content,
+ 	$summary,
+User 	$user = null,
+)
+WikiPage::getTitle	(		)	
