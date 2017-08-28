@@ -1,6 +1,6 @@
 # need to update IRS bracket amounts for current year, this is for 2016
 
-print("Welcome to automated taxes")
+print("Welcome to automated federal taxes")
 print("""MENU
 ------------------------
 single: s
