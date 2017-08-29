@@ -25,8 +25,57 @@ for i in fileList:
         files.append(k.strip())
 fileList.close()
 
+# are you using /w/, /wiki/ or /index.php ?
+ print ("""MENU
+ 
+ Option 1: /w/
+ Option 2: /wiki/
+ Option 3: /Index.php/
+ """)
+ Option = input("Please choose an option from above menu: ")
+ 
+ if Option.lower() == "1":
+     option = "/w"
+ elif Option.lower() == "2":
+     option = "/wiki"
+ elif Option.lower() == "3":
+     option = "/Index.php"
+ else:
+      while (Option.lower() != "1" or Option.lower() != "2" or Option.lower() != "3"):
+             Option = input("Try Again! ")
+             if Option.lower() == "1":
+                 option = "/w"
+                 break
+             elif Option.lower() == "2":
+                 option = "/wiki"
+                 break
+             elif Option.lower() == "3":
+                 option = "/Index.php"
+                 break
+ 
+ mw = input("Are you using MediaWiki 1.28+? y/n ")
+ 
+ if mw.lower() == "y":
+     special = "/Special:Filepath/"
+ 
+ elif mw.lower() == "n":
+     special = "/Special:FilePath/"
+ else:
+     while (mw.lower() != "y" or mw.lower() != "n"):
+         mw = input("Try Again! ")
+         if mw.lower() == "y":
+             special = "/Special:Filepath/"
+             break
+ 
+         elif mw.lower() == "n":
+             special = "/Special:FilePath/"
+             break
+ 
+ subDomain = input("What subdomain? ")
+ domain = input("What is the overall domain? ")
+
 # full url path
-url = "http://yugioh.wikia.com/wiki/Special:FilePath/"
+url = "http://" + subDomain + "." + domain + option + special
 
 urls = []
 fileNames = []
@@ -38,7 +87,7 @@ for file in files:
         urls.append(url)
         fileNames.append( file[removeNS+5:].replace(" ","_") ) # get all filenames
     # reset url builder
-        url = "http://yugioh.wikia.com/wiki/Special:FilePath/"
+        url = "http://" + subDomain + "." + domain + option + special
         
 count = 0 # accurately get which file is being downloaded
 URLE = []
