@@ -1,8 +1,8 @@
 """
-Allows for downloading files from Wikipedia, wikis running recent MediaWiki software release or Wikia.
+Allows for downloading files from Wikipedia, wikis running recent MediaWiki software release or FanDOOM.
 Feed the application a text file and it will automatically do the rest
 Videos will be skipped. Pictures, PDFs, audio files will download.
-Unicode in filenames will cause download failure, application will print out files that failed for manual downloads.
+Unicode in filenames will cause download failure, application will write errors to a requested file.
 """
 
 import urllib
@@ -13,8 +13,15 @@ import time
 import winsound
 
 print("Welcome")
-fileList = open(input("filename? "), "r", -1, "utf-8") # better file opening should be implemented
+fileName = input("filename? ")
 
+try:
+    fileList = open(fileName, "r", -1, "utf-8") # better file opening should be implemented
+
+except IOError:
+    print("Bad file name, try again")
+    fileName = input("filename? ")
+    
 files = []
 for i in fileList:
     line = str(i)
@@ -102,7 +109,7 @@ for u, f in zip(urls, fileNames): # takes in 2 lists to operate on
         #u is to generate an url request, f is the filename to save it under as
         with urllib.request.urlopen(u) as response, open(f, 'wb') as out_file:
             shutil.copyfileobj(response, out_file)
-        
+        time.sleep(2)
     # all error handling
     except urllib.error.URLError as e:
         URLE.append(f)
@@ -120,46 +127,72 @@ for u, f in zip(urls, fileNames): # takes in 2 lists to operate on
         UnicodeEncode.append(f)
         pass
     count+= 1
-
-    if (count % 1000 == 0):
-        winsound.Beep(500,1000)
     
     print("finished downloading file", f, "-", count)
 
-
-    
 print("Done downloading!")
 
 time.sleep(2)
 
-winsound.Beep(500,3000)
+winsound.Beep(500,2000)
+
+print("writing errors to file...")
+
+time.sleep(15)
+
+#Writing links to output file#
+WriteFile = open("failed.txt", "w")
+try:
+    output = open(WriteFile, "r", -1, "utf-8") # better file opening should be implemented
+
+except IOError:
+    print("Bad file name, try again")
+    WriteFile = input("filename? ")
 
 
+WriteFile.write("URL ERRORS")
+WriteFile.write("\n")
+WriteFile.write("-------------------------------------------------------------------------")
+WriteFile.write("\n")
 
-print("-------------------------------------------------------------------------")
-print()
-
-print("URL ERRORS")
 for e1 in URLE:
-    print("File:" + e1)
-print("-------------------------------------------------------------------------")
+    WriteFile.write("File:" + e1)
+    WriteFile.write("\n")
 
-print("HTTP ERRORS")
+WriteFile.write("HTTP ERRORS")
+WriteFile.write("\n")
+WriteFile.write("-------------------------------------------------------------------------")
+WriteFile.write("\n")
+
 for e2 in HTTPE:
-    print("File:" + e2)
-print("-------------------------------------------------------------------------")
+    WriteFile.write("File:" + e2)
+    WriteFile.write("\n")
 
-print("File not found ERRORS")
-for e3 in notFound:
-    print("File:" + e3)
-print("-------------------------------------------------------------------------")
-   
-print("Connection ERRORS")
-for e4 in ConnectionE:
-    print("File:" + e4)
-print("-------------------------------------------------------------------------")
+WriteFile.write("File not found ERRORS")
+WriteFile.write("\n")
+WriteFile.write("-------------------------------------------------------------------------")
+WriteFile.write("\n")
 
-print("Unicode Encode ERRORS")
+for e3 in ConnectionE:
+    WriteFile.write("File:" + e3)
+    WriteFile.write("\n")
+
+WriteFile.write("Connection ERRORS")
+WriteFile.write("\n")
+WriteFile.write("-------------------------------------------------------------------------")
+WriteFile.write("\n")
+
+for e4 in notFound:
+    WriteFile.write("File:" + e4)
+    WriteFile.write("\n")
+
+WriteFile.write("Unicode Encode ERRORS")
+WriteFile.write("\n")
+WriteFile.write("-------------------------------------------------------------------------")
+WriteFile.write("\n")
+
 for e5 in UnicodeEncode:
-    print("File:" + e5)
-print("-------------------------------------------------------------------------")
+    WriteFile.write("File:" + e5)
+    WriteFile.write("\n")
+
+WriteFile.close()
