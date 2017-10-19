@@ -1,3 +1,7 @@
+// findIndexRange
+// calculatevalue
+
+
 #include "stdafx.h"
 #include <thread>       
 #include <chrono> 
