@@ -11,7 +11,6 @@ widow: w
 """)
 
 filingType = input("Please choose an option from the menu: ").lower()
-print(filingType)
 while (not(filingType == "s" or filingType == "sm" or filingType == "m" or filingType == "w")):
     print("Invalid selection, try again")
     filingType = input("Please choose an option from the menu: ").lower()
@@ -90,7 +89,7 @@ elif filingType == 'sm':
     totalOwed += bracket(income, 235350, 2147483647, 0.396, 7) # bracket 7
 print("totalOwed tax owed is: ", totalOwed)
 
-if totalOwed - paidTax >= 0:
-    print("You owe the following amount: ", totalOwed - paidTax)
-else:
+if totalOwed >= paidTax:
     print("You overpaid the following amount: ", totalOwed - paidTax)
+else:
+    print("You owe the following amount: ", totalOwed - paidTax)
