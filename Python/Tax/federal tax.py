@@ -90,6 +90,6 @@ elif filingType == 'sm':
 print("totalOwed tax owed is: ", totalOwed)
 
 if totalOwed >= paidTax:
-    print("You overpaid the following amount: ", totalOwed - paidTax)
+    print("You overpaid the following amount: ", paidTax - totalOwed)
 else:
     print("You owe the following amount: ", totalOwed - paidTax)
