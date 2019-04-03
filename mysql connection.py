@@ -9,21 +9,21 @@ def test():
                                       database = 'test')
        
         mycursor = db.cursor()
-        q1 = "INSERT INTO discordMembers (userid, warn) VALUES (6543234567, 0);"
-        mycursor.execute(q1)
-        db.commit()
-        
-        q2 = "UPDATE discordMembers SET warn = '3' WHERE userID = 2345678909876543"
-        mycursor.execute(q2)
-        db.commit()
-        q3 = "DELETE FROM discordMembers WHERE userid = 559929852808134666"
-        mycursor.execute(q3)
-        db.commit()
-        q4 = "SELECT warn FROM discordMembers WHERE userID = 9876543;"
+##        q1 = "INSERT INTO discordMembers (userid, warn) VALUES (6543234567, 0);"
+##        mycursor.execute(q1)
+##        db.commit()
+##        
+##        q2 = "UPDATE discordMembers SET warn = '3' WHERE userID = 2345678909876543"
+##        mycursor.execute(q2)
+##        db.commit()
+##        q3 = "DELETE FROM discordMembers WHERE userid = 559929852808134666"
+##        mycursor.execute(q3)
+##        db.commit()
+        q4 = "SELECT warn FROM discordMembers;"
         mycursor.execute(q4)
-        r = mycursor.fetchone()[0]
-        print(r)
-        print("finished")
+        data = mycursor.fetchone()[0]
+        db.close()
+        return data
 
     except mysql.connector.Error as err:
       if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -32,7 +32,6 @@ def test():
         print("Database does not exist")
       else:
         print(err)
-    else:
-      db.close()
 
-test()
+print(test())
+
